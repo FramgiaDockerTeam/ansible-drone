@@ -14,6 +14,9 @@ try:
     with open("/root/.ssh/id_rsa", "w") as privateKeyFile:
         os.chmod("/root/.ssh/id_rsa", 0600)
         privateKeyFile.write(privateKey)
+
+    os.system("ssh-add /root/.ssh/id_rsa")
+
     # cd to path
     src_path = argv['workspace']['path']
     # print '[+] cd to', src_path

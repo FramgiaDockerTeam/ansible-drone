@@ -1,44 +1,25 @@
-FROM alpine:3.4
+FROM ubuntu:14.04
+MAINTAINER euclid1990
 
-MAINTAINER Van Vuong Nguyen
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    apt-utils \
+    apt-transport-https \
+    ca-certificates \
+    software-properties-common \
+    net-tools \
+    openssh-server \
+    python-simplejson \
+    python-pip \
+    zip \
+    vim
 
-
-RUN echo "===> Installing sudo to emulate normal OS behavior..."  && \
-    apk --update add sudo                                         && \
-    \
-    \
-    echo "===> Adding Python runtime..."  && \
-    apk --update add python py-pip openssl ca-certificates    && \
-    apk --update add --virtual build-dependencies \
-                python-dev libffi-dev openssl-dev build-base  && \
-    pip install --upgrade pip cffi                            && \
-    \
-    \
-    echo "===> Installing Ansible..."  && \
-    pip install ansible                && \
-    \
-    \
-    echo "===> Installing handy tools (not absolutely required)..."  && \
-    apk --update add sshpass openssh-client  && \
-    \
-    \
-    echo "===> Removing package list..."  && \
-    apk del build-dependencies            && \
-    rm -rf /var/cache/apk/*               && \
-    \
-    \
-    echo "===> Adding hosts for convenience..."  && \
-    mkdir -p /etc/ansible                        && \
-    echo 'localhost' > /etc/ansible/hosts
+RUN apt-add-repository ppa:ansible/ansible
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ansible
 
 RUN mkdir /var/run/sshd && mkdir -p /root/.ssh/
 
 COPY ./ansible.cfg /etc/ansible/ansible.cfg
 
 COPY ./entrypoint.py /scripts/entrypoint.py
-
-# default command: display Ansible version
-CMD [ "ansible-playbook", "--version" ]
-
 
 ENTRYPOINT ["python", "/scripts/entrypoint.py"]

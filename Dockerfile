@@ -31,7 +31,7 @@ RUN echo "===> Installing sudo to emulate normal OS behavior..."  && \
     mkdir -p /etc/ansible                        && \
     echo 'localhost' > /etc/ansible/hosts
 
-RUN mkdir -p /root/.ssh/
+RUN mkdir /var/run/sshd && mkdir -p /root/.ssh/
 
 COPY ./ansible.cfg /etc/ansible/ansible.cfg
 

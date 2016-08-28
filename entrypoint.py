@@ -15,7 +15,9 @@ try:
         os.chmod("/root/.ssh/id_rsa", 0600)
         privateKeyFile.write(privateKey)
 
-    os.system("ssh-add /root/.ssh/id_rsa")
+    os.system("ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub")
+    os.system("eval \"$(ssh-agent -s)\"")
+    os.system("ssh-add ~/.ssh/id_rsa")
 
     # cd to path
     src_path = argv['workspace']['path']

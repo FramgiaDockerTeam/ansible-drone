@@ -18,7 +18,7 @@ try:
     src_path = argv['workspace']['path']
     # print '[+] cd to', src_path
     if src_path:
-        os.chdir(src_path)
+        os.chdir(src_path + "/.ansible")
     # run commands
     print '[+] Running commands'
 

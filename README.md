@@ -1,6 +1,8 @@
 ### Ansible Drone Plugin
 
-#### Command
+#### Configure deployment
+
+Edit file: `.drone.yml`
 
 ```
 deploy:

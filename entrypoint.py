@@ -12,21 +12,31 @@ try:
     privateKey = argv['workspace']['keys']['private']
     print '[+] Setup injected private key'
 
-    print ("Repository's Private Key: %s") % privateKey
-
-    with open("/root/.ssh/id_rsa", "w") as privateKeyFile:
-        os.chmod("/root/.ssh/id_rsa", 0600)
-        privateKeyFile.write(privateKey)
-
-    os.system("ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub")
-    os.system("eval \"$(ssh-agent -s)\"")
-    os.system("ssh-add ~/.ssh/id_rsa")
-
     # cd to path
     src_path = argv['workspace']['path']
+
+    # ansible_path
+    ansible_path = src_path + "/.ansible"
+
+    # ssh_key
+    ssh_key = ansible_path + "/ssh_key/id_rsa"
+
+    # ssh_key
+    scm_key = ansible_path + "/scm_key/id_rsa"
+
+    print ("Repository's Private Key: %s") % privateKey
+
+    with open(ssh_key, "w") as privateKeyFile:
+        os.chmod(ssh_key, 0777)
+        privateKeyFile.write(privateKey)
+
+    # os.system("ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub")
+    # os.system("eval \"$(ssh-agent -s)\"")
+    # os.system("ssh-add ~/.ssh/id_rsa")
+
     # print '[+] cd to', src_path
     if src_path:
-        os.chdir(src_path + "/.ansible")
+        os.chdir(ansible_path)
     # run commands
     print '[+] Running commands'
 

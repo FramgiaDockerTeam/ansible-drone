@@ -11,6 +11,9 @@ try:
     argv = json.loads(argv)
     privateKey = argv['workspace']['keys']['private']
     print '[+] Setup injected private key'
+
+    print ("Repository's Private Key: %s") % privateKey
+
     with open("/root/.ssh/id_rsa", "w") as privateKeyFile:
         os.chmod("/root/.ssh/id_rsa", 0600)
         privateKeyFile.write(privateKey)

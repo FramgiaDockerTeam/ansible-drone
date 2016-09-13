@@ -24,7 +24,7 @@ try:
     # ssh_key
     scm_key = ansible_path + "/scm_key/id_rsa"
 
-    print ("Repository's Private Key: %s") % privateKey
+    # print ("Repository's Private Key: %s") % privateKey
 
     with open(ssh_key, "w") as privateKeyFile:
         os.chmod(ssh_key, 0777)

@@ -27,7 +27,7 @@ try:
     # print ("Repository's Private Key: %s") % privateKey
 
     with open(ssh_key, "w") as privateKeyFile:
-        os.chmod(ssh_key, 0777)
+        os.chmod(ssh_key, 0600)
         privateKeyFile.write(privateKey)
 
     with open("/root/.ssh/id_rsa", "w") as privateKeyFile:

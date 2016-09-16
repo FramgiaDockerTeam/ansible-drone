@@ -30,9 +30,9 @@ try:
         os.chmod(ssh_key, 0777)
         privateKeyFile.write(privateKey)
 
-    # os.system("ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub")
-    # os.system("eval \"$(ssh-agent -s)\"")
-    # os.system("ssh-add ~/.ssh/id_rsa")
+    os.system("ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub")
+    os.system("eval \"$(ssh-agent -s)\"")
+    os.system("ssh-add ~/.ssh/id_rsa")
 
     # print '[+] cd to', src_path
     if src_path:

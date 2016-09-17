@@ -18,24 +18,11 @@ try:
     # ansible_path
     ansible_path = src_path + "/.ansible"
 
-    # ssh_key
-    ssh_key = ansible_path + "/ssh_key/id_rsa"
-
-    # ssh_key
-    scm_key = ansible_path + "/scm_key/id_rsa"
-
     # print ("Repository's Private Key: %s") % privateKey
-
-    with open(ssh_key, "w") as privateKeyFile:
-        os.chmod(ssh_key, 0600)
-        privateKeyFile.write(privateKey)
 
     with open("/root/.ssh/id_rsa", "w") as privateKeyFile:
         os.chmod("/root/.ssh/id_rsa", 0600)
         privateKeyFile.write(privateKey)
-
-    os.system("ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub")
-    os.system("eval \"$(ssh-agent -s)\"")
 
     # print '[+] cd to', src_path
     if src_path:

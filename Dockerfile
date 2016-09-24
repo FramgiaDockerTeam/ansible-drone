@@ -12,7 +12,7 @@ RUN echo "===> Installing sudo to emulate normal OS behavior..."  && \
     apk --update add --virtual build-dependencies \
                 python-dev libffi-dev openssl-dev build-base  && \
     pip install --upgrade pip cffi                            && \
-    \
+    pip install pexpect                                       && \
     \
     echo "===> Installing Ansible..."  && \
     pip install ansible                && \
